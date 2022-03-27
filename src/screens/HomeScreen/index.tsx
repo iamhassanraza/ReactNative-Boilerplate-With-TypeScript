@@ -17,7 +17,7 @@ export default function HomeScreen() {
     <View>
       <Text>Home Screen</Text>
       <TouchableOpacity onPress={() => Navigator.navigate(MainRoutes.AddPost)}>
-        <Text>GO to post</Text>
+        <Text style={{fontFamily: 'ProductSans-Bold'}}>GO to post</Text>
       </TouchableOpacity>
     </View>
   );
