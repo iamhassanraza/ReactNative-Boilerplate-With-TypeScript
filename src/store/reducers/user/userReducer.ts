@@ -14,14 +14,13 @@ export default class UserReducer {
     }
 
     public static reducer(state: UserState = UserReducer._initialState, action: IAction<any | User>): UserState {
+
         switch (action.type) {
-
-
             case userTypes.LOGIN:
                 return {
                     ...state,
                     state: iDataState.loading,
-                    errorMessage: ""
+                    errorMessage: "",
                 }
 
             case userTypes.LOGIN_SUCCESS:
