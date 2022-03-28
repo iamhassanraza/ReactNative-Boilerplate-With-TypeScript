@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 
-export interface IAction<P> extends Action<number> {
-    type: number,
+export interface IAction<P> extends Action<string> {
+    type: string,
     payload?: P
     error?: string
 

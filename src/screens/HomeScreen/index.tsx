@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import UserAction from 'store/actions/userActions';
 import Navigator from 'utils/Navigator';
 import {StoreState} from 'store/states/root/RootState';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function HomeScreen() {
       <Text>Home Screen</Text>
       <TouchableOpacity onPress={() => Navigator.navigate(MainRoutes.AddPost)}>
         <Text style={{fontFamily: 'ProductSans-Bold'}}>GO to post</Text>
+        <Icon size={24} color="black" name="movie" />
       </TouchableOpacity>
     </View>
   );
