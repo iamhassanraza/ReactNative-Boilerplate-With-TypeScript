@@ -10,11 +10,12 @@ export const Colors = {
     darkBackground: '#1b262c',
     lightBackground: '#ffffff',
     darkPrimary: '#0f4c75',
-    primary: '#0597fa',
+    primary: '#442445',
     grey: '#5a5a5a',
     lightGrey: "#939AA4",
     lighterGrey: "#CDD4DA",
     error: "#dd3333",
+    textInput: '#CDD4DA'
 };
 
 export const darkColors = {

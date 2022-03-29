@@ -19,6 +19,8 @@ export const normalize = (size: number) => {
     return Math.round(PixelRatio.roundToNearestPixel(newSize));
 };
 
+
+
 export default {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,

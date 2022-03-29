@@ -6,7 +6,7 @@ import UserAction from 'store/actions/userActions';
 import Navigator from 'utils/Navigator';
 import {StoreState} from 'store/states/root/RootState';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import CustomTextInput from 'components/CustomTextInput';
 export default function HomeScreen() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,6 +22,9 @@ export default function HomeScreen() {
       <TouchableOpacity onPress={() => Navigator.navigate(MainRoutes.AddPost)}>
         <Text style={{fontFamily: 'ProductSans-Bold'}}>GO to post</Text>
         <Icon size={24} color="black" name="movie" />
+        <CustomTextInput
+          placeholder={'Some Place Holder'}
+          title="TITLE"></CustomTextInput>
       </TouchableOpacity>
     </View>
   );
