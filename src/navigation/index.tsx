@@ -5,13 +5,14 @@ import {useSelector} from 'react-redux';
 import {navigationRef} from 'utils/Navigator';
 import HomeStack from './HomeStack';
 import {StoreState} from 'store/states/root/RootState';
+import AuthStack from './AuthStack';
 
 const Navigation = () => {
   const user = useSelector((state: StoreState) => state.user.user);
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {true ? <HomeStack /> : null}
+      {user ? <HomeStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

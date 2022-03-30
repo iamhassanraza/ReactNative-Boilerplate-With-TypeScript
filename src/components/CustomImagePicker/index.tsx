@@ -16,7 +16,6 @@ export default function CustomImagePicker(props: CustomImagePickerProps) {
       cropping: true,
       mediaType: 'photo',
     }).then((image: ImageType) => {
-      console.log(image);
       props.onChange(image);
     });
   };

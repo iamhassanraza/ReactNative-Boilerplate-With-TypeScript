@@ -18,25 +18,11 @@ export default class UserReducer {
         switch (action.type) {
             case userTypes.LOGIN:
                 return {
-                    ...state,
-                    state: iDataState.loading,
+                    user: action.payload,
+                    state: iDataState.loaded,
                     errorMessage: "",
                 }
 
-            case userTypes.LOGIN_SUCCESS:
-                return {
-                    ...state,
-                    user: action.payload,
-                    state: iDataState.loaded,
-                    errorMessage: ""
-                }
-
-            case userTypes.LOGIN_FAILURE:
-                return {
-                    ...state,
-                    state: iDataState.error,
-                    errorMessage: action.error
-                }
             default:
                 return state
         }

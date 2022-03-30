@@ -1,31 +1,52 @@
-import {MainRoutes} from 'navigation/HomeStack';
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, View, ListRenderItem} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import UserAction from 'store/actions/userActions';
-import Navigator from 'utils/Navigator';
 import {StoreState} from 'store/states/root/RootState';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import CustomTextInput from 'components/CustomTextInput';
+
+import {PostActions} from 'store/actions/postActions';
+import {FlatList} from 'react-native-gesture-handler';
+import Post from 'models/post/Post';
+import {styles} from './HomeScreen.styles';
+import CustomButton from 'components/Button';
+import Navigator from 'utils/Navigator';
+import {MainRoutes} from 'navigation/HomeStack';
+
 export default function HomeScreen() {
+  const postArray = useSelector((state: StoreState) => state.postReducer.post);
   const dispatch = useDispatch();
+
+
+  useEffect(() => {}, [postArray?.length]);
+
   useEffect(() => {
-    dispatch(UserAction.login({}));
+    dispatch(PostActions.postFetchRequest());
   }, []);
 
-  const state = useSelector((state: StoreState) => state);
-  console.log(state);
+  const renderItem: ListRenderItem<Post> = ({item}) => (
+    <View style={styles.itemContainer}>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemDesc}>{item.body}</Text>
+    </View>
+  );
+
+  const onButtonPress = () => {
+    Navigator.navigate(MainRoutes.AddPost);
+  };
 
   return (
     <View>
-      <Text>Home Screen</Text>
-      <TouchableOpacity onPress={() => Navigator.navigate(MainRoutes.AddPost)}>
-        <Text style={{fontFamily: 'ProductSans-Bold'}}>GO to post</Text>
-        <Icon size={24} color="black" name="movie" />
-        <CustomTextInput
-          placeholder={'Some Place Holder'}
-          title="TITLE"></CustomTextInput>
-      </TouchableOpacity>
+      <FlatList
+        removeClippedSubviews={true}
+        showsVerticalScrollIndicator={false}
+        data={postArray}
+        keyExtractor={(item, _) => item.id.toString()}
+        renderItem={renderItem}
+      />
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          onPress={onButtonPress}
+          text="Add New Post"></CustomButton>
+      </View>
     </View>
   );
 }

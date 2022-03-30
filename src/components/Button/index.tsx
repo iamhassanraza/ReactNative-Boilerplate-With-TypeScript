@@ -13,9 +13,9 @@ interface ButtonProps extends TouchableOpacityProps {
   text: string;
 }
 
-export default function Button(props: ButtonProps) {
+export default function CustomButton(props: ButtonProps) {
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
+    <TouchableOpacity onPress={props.onPress} style={styles.buttonContainer}>
       <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   );

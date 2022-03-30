@@ -4,18 +4,10 @@ import { IAction } from "./IAction";
 
 
 export default class UserAction {
-    public static login = (requestParams: Object): IAction<Object> => {
+    public static login = (requestParams: any): IAction<User> => {
         return {
             type: userTypes.LOGIN,
             payload: requestParams,
         };
     };
-
-    public static loginSuccess = (user: User): IAction<User> => {
-        return {
-            type: userTypes.LOGIN_SUCCESS,
-            payload: user,
-        };
-    };
-
 }

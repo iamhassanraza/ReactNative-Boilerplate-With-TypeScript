@@ -4,12 +4,6 @@ import UserAction from 'store/actions/userActions';
 
 
 export function* login() {
-    // const user = yield call()
-    console.log('login saga called')
-    const user: User = {
-        name: 'Hassan',
-        avatar: 'SomeAvatar'
-    }
-
-    yield put(UserAction.loginSuccess(user))
+    //every app has user login functionality 
+    // put your user login logic  here
 }
