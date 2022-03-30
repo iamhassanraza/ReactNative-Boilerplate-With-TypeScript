@@ -23,7 +23,7 @@
       "placeholder":"Enter your email"
     },
     {
-      "id": 5,
+      "id": 4,
       "key": "birthday",
       "type": "date",
       "label": "Date of Birth",
@@ -31,7 +31,7 @@
       "placeholder":"Select your date of birth"
     },
     {
-      "id": 4,
+      "id": 5,
       "key": "gender",
       "type": "radio",
       "label": "Gender",

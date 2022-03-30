@@ -10,7 +10,8 @@ import CustomDatePicker from 'components/CustomDatePicker';
 import {StoreState} from 'store/states/root/RootState';
 import {useDispatch, useSelector} from 'react-redux';
 import UserAction from 'store/actions/userActions';
-
+import Validator from 'utils/Validator';
+import {errorToast} from 'utils/Toast';
 const data: UserFrom = require('../../mock/form-data.json');
 
 interface IState {
@@ -22,34 +23,64 @@ export default function Form() {
   const user = useSelector((state: StoreState) => state.user);
   const dispatch = useDispatch();
 
-  console.log({user});
-
   useEffect(() => {
-    //setting intial State
+    const tempstate: IState = {};
     data.map(value => {
       switch (value.type) {
         case formTypes.Input:
-          setstate({...state, [value.key]: ''});
+          tempstate[value.key] = '';
           break;
         case formTypes.RadioButton:
-          setstate({...state, [value.key]: value.options[0]});
+          tempstate[value.key] = value.options[0];
+          // state = {...state, [value.key]: };
           break;
         case formTypes.DOB:
-          setstate({...state, [value.key]: ''});
+          console.log('setting dob', {[value.key]: ''});
+          tempstate[value.key] = '';
           break;
         case formTypes.Image:
-          setstate({...state, [value.key]: ''});
+          tempstate[value.key] = '';
           break;
 
         default:
           break;
       }
     });
+
+    //setstaet is an async function , we should not call setstate in a loop
+    setstate(tempstate);
   }, []);
 
+  const validateForm = (): boolean => {
+    let isValid = true;
+    let error = '';
+    data.forEach(value => {
+      if (
+        value.required &&
+        value.key === 'email' &&
+        !Validator.isEmailValid(state[value.key])
+      ) {
+        isValid = false;
+        error = value.key + ' is invalid';
+      }
+      if (value.required && state[value.key] === '') {
+        isValid = false;
+        error = value.key + ' is empty';
+      }
+    });
+
+    if (!isValid) {
+      errorToast(error);
+    }
+
+    console.log(isValid, error);
+    return isValid;
+  };
+
   const onButtonPress = () => {
- 
-    dispatch(UserAction.login({...state}));
+    if (validateForm()) {
+      dispatch(UserAction.login({...state}));
+    }
   };
 
   const mapData = (form: UserFrom) => {

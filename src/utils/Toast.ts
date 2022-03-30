@@ -1,7 +1,7 @@
 import Toast, { Durations } from 'react-native-root-toast';
 import { Colors } from 'theme/colors';
 
-export default (msg: string) => {
+export const errorToast = (msg: string) => {
     Toast.show(msg, {
         backgroundColor: Colors.error,
         textColor: Colors.white,

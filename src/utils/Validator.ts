@@ -9,4 +9,9 @@ export default class Validator {
         let isValid = expression.test(String(term).toLowerCase());
         return isValid;
     };
-}
+
+
+
+};
+
+
