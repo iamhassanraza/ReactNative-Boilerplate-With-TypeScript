@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="Yk5-4v-KDP">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="853.33333333333337"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yk5-4v-KDP" secondAttribute="height" multiplier="15:8" id="5RH-1E-kDn"/>
                                 </constraints>

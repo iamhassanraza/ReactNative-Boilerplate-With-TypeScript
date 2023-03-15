@@ -1,7 +1,5 @@
-import PostState from "../post/PostReducerState";
-import UserState from "../user/UserReducerState";
+import { IMachinesState } from "store/types";
 
 export interface StoreState {
-    user: UserState,
-    postReducer: PostState
+    machines: IMachinesState,
 }

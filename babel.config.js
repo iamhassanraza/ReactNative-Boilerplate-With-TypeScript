@@ -1,5 +1,6 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
+
   plugins: [
     [
       'module-resolver',
@@ -8,11 +9,12 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           tests: ['./tests/'],
-          'screens':'./src/screens',
+          'screens': './src/screens',
           '@components': './src/components',
-          '@theme':'./src/theme'
+          '@theme': './src/theme'
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };

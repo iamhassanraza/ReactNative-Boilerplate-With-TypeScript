@@ -17,4 +17,8 @@ this command will links fonts in Info.plst for IOS and creates fonts directory (
 React Native Vector Icons Are Added in this project. Just Use
 visit https://oblador.github.io/react-native-vector-icons/ for icons
 
+<!-- splash screen update -->
 
+go to android/src/main/res and repalce your splash screen for android and its done
+
+for ios open xcode and repalce your splash screen on images/assets

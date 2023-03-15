@@ -14,6 +14,8 @@ const fontSize = {
     h2: 34,
     h3: 30,
     h4: 28,
+    h5: 26,
+    h6: 24,
     headerTitle: 28,
     titleMedium: 20,
     title: 19,

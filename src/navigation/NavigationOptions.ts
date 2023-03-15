@@ -20,6 +20,8 @@ const defaultNavigation = (): StackNavigationOptions => {
 
         },
         //ICON COLOR
+        headerLeftLabelVisible: false,
+
         headerTintColor: Colors.white,
         cardStyle: {
             //screen styles below header

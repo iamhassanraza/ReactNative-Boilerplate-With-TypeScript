@@ -10,7 +10,7 @@ export const Colors = {
     darkBackground: '#1b262c',
     lightBackground: '#ffffff',
     darkPrimary: '#0f4c75',
-    primary: '#442445',
+    primary: 'rgb(90,13,226)',
     grey: '#5a5a5a',
     lightGrey: "#939AA4",
     lighterGrey: "#CDD4DA",

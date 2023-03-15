@@ -1,29 +1,36 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from 'screens/Home';
-import AddPostScreen from 'screens/AddPost';
-import {defaultNavigation} from './NavigationOptions';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Dashboard from 'screens/Dashboard';
+import CategoryDetails from 'screens/CategoryDetails';
+import ManageCategories from 'screens/ManageCategories';
+import { defaultNavigation } from './NavigationOptions';
 
-//screen names for homestack
+//screen names for drawer navigation
 export enum MainRoutes {
   Home = 'Home',
   AddPost = 'AddPost',
+  Dashboard = 'Dashboard',
+  ManageCategories = 'Manage Categories',
+  CategoryDetails = 'CategoryDetails'
 }
 
 // define the params your screen is going to use
-export type MainStackParamList = {
-  [MainRoutes.AddPost]: undefined;
-  [MainRoutes.Home]: {update: boolean} | undefined; // just an example, "update" will later be used for version checks
+export type MainDrawerParamList = {
+  [MainRoutes.ManageCategories]: undefined;
+  [MainRoutes.CategoryDetails]: undefined;
+  [MainRoutes.Dashboard]: undefined;
 };
 
-export default function HomeStack() {
-  const RootStack = createStackNavigator<MainStackParamList>();
+export default function MainDrawer() {
+  const Drawer = createDrawerNavigator<MainDrawerParamList>();
   return (
-    <RootStack.Navigator
-      screenOptions={defaultNavigation}
-      initialRouteName={MainRoutes.Home}>
-      <RootStack.Screen name={MainRoutes.Home} component={HomeScreen} />
-      <RootStack.Screen name={MainRoutes.AddPost} component={AddPostScreen} />
-    </RootStack.Navigator>
+    <Drawer.Navigator
+      initialRouteName={MainRoutes.Dashboard}
+      // screenOptions={defaultNavigation}
+      >
+      <Drawer.Screen name={MainRoutes.Dashboard} component={Dashboard} />
+      <Drawer.Screen name={MainRoutes.ManageCategories} component={ManageCategories} />
+      <Drawer.Screen name={MainRoutes.CategoryDetails} component={CategoryDetails} />
+    </Drawer.Navigator>
   );
 }
