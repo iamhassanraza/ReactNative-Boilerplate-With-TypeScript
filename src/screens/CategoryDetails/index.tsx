@@ -21,13 +21,17 @@ interface MachineFormCard {
 
 function MachineFormCard(props: MachineFormCard) {
   const [openDateModal, setopenDateModal] = useState(false)
-  const selectedTypeId = useSelector((state: StoreState) => state.machines.types[0].id)
+  const selectedTypeId = useSelector((state: StoreState) => state?.machines?.types[0]?.id)
   const categoryName = useSelector((state: StoreState) => state.machines.types[0].categoryName)
   const machineTypeId = props.machineTypeId
   const machineId = props.machineId
   const attributeprops = props.attributes
   const attributes = useSelector((state: StoreState) => state.machines.types[0].attributes)
 
+
+  if(!selectedTypeId){
+    return null
+  }
 
 
   return (
