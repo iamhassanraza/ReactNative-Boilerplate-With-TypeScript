@@ -39,7 +39,7 @@ export default function ManageCategories() {
         keyExtractor={(item, index) => item.id + ' ' + index}
         showsVerticalScrollIndicator={false}
         data={machineTypes}
-        // style={{ marginBottom: metrics.heightPercentageToDP('7') }}
+        style={{ marginBottom: metrics.heightPercentageToDP('7') }}
         renderItem={({ item: type }) => <MachineTypeFormCard
           id={type.id}
           attributes={type.attributes}

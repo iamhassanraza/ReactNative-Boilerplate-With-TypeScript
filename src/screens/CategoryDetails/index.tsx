@@ -1,127 +1,66 @@
 
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { fontSize } from 'theme/fonts'
+import { RouteProp } from '@react-navigation/native';
+
 import { Button, Switch, TextInput } from '@react-native-material/core'
 import { Colors } from 'theme'
 import DatePicker from 'react-native-date-picker'
 import { useDispatch, useSelector } from 'react-redux'
 import { MachineTypeActions } from 'store/actions/machineTypeActions'
 import { StoreState } from 'store/states/root/RootState'
-import { IMachine } from 'store/types'
+import { Attribute, IMachine } from 'store/types'
 import uuid from "react-native-uuid"
 import metrics from 'theme/metrics'
+import { MainDrawerParamList, MainRoutes } from 'navigation/HomeStack';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
-interface MachineFormCard {
-  machineTypeId: string,
-  machineId: string,
-  attributes: { [key: string]: any }
+import MachineForm from 'components/MachineFormCard'
+import CategoryList from 'components/CategoryList';
 
-}
 
-function MachineFormCard(props: MachineFormCard) {
+
+
+type CategoryDetailsScreenRouteProp = RouteProp<MainDrawerParamList, MainRoutes.CategoryDetails>;
+type NavigationProp = DrawerNavigationProp<MainDrawerParamList, MainRoutes.CategoryDetails>;
+
+
+type CategoryDetailsProps = {
+  route: CategoryDetailsScreenRouteProp;
+  navigation: NavigationProp
+};
+
+
+
+
+
+
+export default function CategoryDetails(props: CategoryDetailsProps) {
   const [openDateModal, setopenDateModal] = useState(false)
-  const selectedTypeId = useSelector((state: StoreState) => state?.machines?.types[0]?.id)
-  const categoryName = useSelector((state: StoreState) => state.machines.types[0].categoryName)
-  const machineTypeId = props.machineTypeId
-  const machineId = props.machineId
-  const attributeprops = props.attributes
-  const attributes = useSelector((state: StoreState) => state.machines.types[0].attributes)
-
-
-  if(!selectedTypeId){
-    return null
-  }
-
-
-  return (
-    <View style={{ marginBottom: '5%' }}>
-      <DatePicker
-        modal
-        open={openDateModal}
-        date={new Date()}
-        onConfirm={date => {
-          setopenDateModal(false);
-        }}
-        onCancel={() => {
-          setopenDateModal(false);
-        }}
-      />
-      <View style={{ padding: '5%', backgroundColor: Colors.lightBackground, borderWidth: 1, borderColor: Colors.lighterGrey, borderRadius: 5 }}>
-
-        <Text style={{ fontSize: fontSize.titleMedium, marginBottom: '5%' }}>CategoryDetails</Text>
-
-        <FlatList
-          keyExtractor={(item, index) => item.id + ' ' + index}
-          showsVerticalScrollIndicator={false}
-          data={attributes}
-          // style={{ marginBottom: metrics.heightPercentageToDP('7') }}
-          renderItem={({ item: value }) => {
-            switch (value.type) {
-              case "Date":
-                return <TextInput style={{ marginBottom: '5%' }} onPressIn={() => {
-                  setopenDateModal(true)
-                }} editable={false} value={""} variant="outlined" label={value.label} />
-              case "Text":
-                return <TextInput 
-                  onChangeText={(text) => {}}
-                  value={''}
-                  style={{ marginBottom: '5%' }}
-                  variant="outlined"
-                  label={value.label} />
-              case "CheckBox":
-                return <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                  <Switch value={false} onValueChange={(e) => {
-                    const updatedImachine: IMachine = {
-                      id: machineId,
-                      typeId: machineTypeId,
-                      attributes: {
-                        ...attributeprops,
-                        [value.id]: e
-                      }
-                    }
-
-                    MachineTypeActions.editMachine(props.machineId, updatedImachine)
-                  }} />
-                  <Text style={{ marginLeft: '3%', fontWeight: '500', fontSize: fontSize.medium_15 }}>{value.label}</Text>
-                </View>
-
-              case "Number":
-                return <TextInput keyboardType="number-pad" style={{ marginBottom: '5%' }} value={""} variant="outlined" label={value.label} />
-
-              default:
-                return null;
-            }
-
-
-          }
-          }
-        />
-
-      </View>
-    </View>
-  )
-}
-
-
-
-
-
-
-
-export default function CategoryDetails() {
-  const [openDateModal, setopenDateModal] = useState(false)
-  const selectedTypeId = useSelector((state: StoreState) => state.machines.types[0].id)
-  const categoryName = useSelector((state: StoreState) => state.machines.types[0].categoryName)
-  const attributes = useSelector((state: StoreState) => state.machines.types[0].attributes)
+  const { id: selectedTypeId, categoryName } = props.route.params.params
+  // const selectedTypeId = useSelector((state: StoreState) => state.machines?.types[0]?.id)
+  const attributes = useSelector((state: StoreState) => state.machines.types.find((value) => value.id === selectedTypeId)?.attributes)
   const machines = useSelector((state: StoreState) => state.machines.machines)
+
+
+
+
+  // console.log("========",{attributes})
+  useLayoutEffect(() => {
+    props.navigation.setOptions({ title: `Details: ${categoryName}` });
+  }, [props.navigation, selectedTypeId, categoryName]);
+
+
+  if (!selectedTypeId) return null
 
 
   const dispatch = useDispatch()
 
   const onAddItemPress = () => {
+
     var obj: { [key: string]: any } = {}
-    attributes.forEach(attr => {
+    attributes?.forEach(attr => {
       switch (attr.type) {
         case "CheckBox":
           obj[attr.id] = false
@@ -140,6 +79,7 @@ export default function CategoryDetails() {
       }
     });
 
+    console.log({ obj })
 
     const machine: IMachine = {
       id: uuid?.v4()?.toString(),
@@ -151,28 +91,8 @@ export default function CategoryDetails() {
   }
 
   return (
-    <View style={{ paddingHorizontal: '3%' }}>
-
-      <View style={{ flexDirection: 'row', justifyContent: "space-between", padding: '3%' }}>
-        <Text style={{ fontSize: fontSize.h5 }}>{categoryName}</Text>
-        <Button onPress={onAddItemPress} title="Add Item"></Button>
-      </View>
-
-      <FlatList
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false}
-        data={machines}
-        style={{ marginBottom: metrics.heightPercentageToDP('5') }}
-        renderItem={({ item: machine }) => <MachineFormCard
-          machineTypeId={machine.typeId}
-          machineId={machine.id}
-          attributes={machine.attributes} />
-        }
-        ListEmptyComponent={() => {
-          return <Text>There Are No Items</Text>
-        }}
-
-      />
+    <View style={{ paddingHorizontal: '3%', paddingBottom: metrics.heightPercentageToDP('15') }}>
+      <CategoryList machineTypeId={selectedTypeId}></CategoryList>
     </View>
   )
 }
