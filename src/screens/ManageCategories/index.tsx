@@ -12,9 +12,7 @@ import MachineTypeFormCard from 'components/MachineTypeForm'
 
 export default function ManageCategories() {
 
-
   const machineTypes = useSelector((state: StoreState) => state.machines.types)
-
   const dispatch = useDispatch()
 
   const onAddCategoryPress = () => {
@@ -31,41 +29,48 @@ export default function ManageCategories() {
     dispatch(MachineTypeActions.addMachineType(machineType))
   }
 
-  // return null
+  const renderMachineTypeFormCard = ({ item: type }: { item: IMachineType }) => (
+    <MachineTypeFormCard
+      id={type.id}
+      attributes={type.attributes}
+      titleAttribute={type.titleAttribute}
+      categoryName={type.categoryName}
+    />
+  );
+
 
   return (
-    <View style={{ flex: 1, padding: '5%' }}>
+    <View style={styles.container}>
       <FlatList
         keyExtractor={(item, index) => item.id + ' ' + index}
         showsVerticalScrollIndicator={false}
         data={machineTypes}
-        style={{ marginBottom: metrics.heightPercentageToDP('7') }}
-        renderItem={({ item: type }) => <MachineTypeFormCard
-          id={type.id}
-          attributes={type.attributes}
-          titleAttribute={type.titleAttribute}
-          categoryName={type.categoryName}
-
-        ></MachineTypeFormCard>
-        }
+        style={styles.listContainer}
+        renderItem={renderMachineTypeFormCard}
         ListEmptyComponent={() => {
           return <Text>There Are No Categories</Text>
         }}
-
       />
       <View style={styles.buttonContainer}>
-        <Button onPress={onAddCategoryPress} title='Add Category'></Button>
+        <Button onPress={onAddCategoryPress} title='Add Category' />
       </View>
     </View>
   )
 }
 
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: '5%'
+  },
+  listContainer: {
+    marginBottom: metrics.heightPercentageToDP('7')
+  },
   buttonContainer: {
     paddingVertical: metrics.heightPercentageToDP('3'),
     width: '100%',
-    alignSelf: 'center', position: 'absolute',
+    alignSelf: 'center',
+    position: 'absolute',
     bottom: 0
   }
 })

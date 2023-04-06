@@ -1,7 +1,5 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import React from 'react'
-import metrics from 'theme/metrics'
-import { fontSize } from 'theme/fonts'
+import {Text, View, FlatList } from 'react-native'
+import React, { useCallback } from 'react'
 import { TextInput, Button } from "@react-native-material/core";
 import CustomButton from 'components/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -9,55 +7,59 @@ import { Icons } from 'constants/Icons';
 import PopUpMenu from 'components/PopupMenu';
 import { InputTypesArray } from 'constants/InputTypes';
 import { Attribute, IMachineType, InputTypes } from 'store/types';
-import { Colors } from 'theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from 'store/states/root/RootState';
 import { MachineTypeActions } from 'store/actions/machineTypeActions';
 import uuid from 'react-native-uuid'
 import AttributeField from './Components/AttributeField';
+import { styles } from './styles';
+
 
 interface MachineTypeFormProps extends IMachineType { }
 
 export default function MachineTypeFormCard(props: MachineTypeFormProps) {
-
-
 
   const categoryName = useSelector((state: StoreState) => {
     const machineType = state.machines.types.find(type => type.id === props.id);
     return machineType ? machineType.categoryName : '';
   });
 
+  const machineTypeId = props.id;
 
-  const machineTypeId = props.id
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-
-  const onChangeCategoryNameText = (text: string) => {
+  const onChangeCategoryNameText = useCallback((text: string) => {
     dispatch(MachineTypeActions.editMachineType(machineTypeId, {
       ...props,
       categoryName: text
-    }))
-  }
+    }));
+  }, [dispatch, machineTypeId, props]);
 
-  const onAddNewField = (value: InputTypes) => {
+  const onAddNewField = useCallback((value: InputTypes) => {
     try {
       const newAttribute: Attribute = {
         id: uuid?.v4()?.toString(),
         label: 'Field',
         type: value
-      }
-      dispatch(MachineTypeActions.addAttribute(machineTypeId, newAttribute))
+      };
+      dispatch(MachineTypeActions.addAttribute(machineTypeId, newAttribute));
     } catch (error) {
-      console.log({ error })
+      console.log({ error });
     }
-  }
+  }, [dispatch, machineTypeId]);
 
-  const onRemoveCategoryPress = () => {
-    dispatch(MachineTypeActions.deleteMachineType(machineTypeId))
-  }
+  const onRemoveCategoryPress = useCallback(() => {
+    dispatch(MachineTypeActions.deleteMachineType(machineTypeId));
+  }, [dispatch, machineTypeId]);
 
-
+  const renderAttributeField = useCallback(({ item: value }) => (
+    <AttributeField
+      id={value.id}
+      machineTypeId={machineTypeId}
+      label={value.label}
+      type={value.type}
+    />
+  ), [machineTypeId]);
 
   return (
     <View style={styles.container}>
@@ -68,13 +70,7 @@ export default function MachineTypeFormCard(props: MachineTypeFormProps) {
         keyExtractor={(item, index) => item.id + ' ' + index}
         showsVerticalScrollIndicator={false}
         data={props?.attributes || []}
-        renderItem={({ item: value }) => <AttributeField
-          id={value.id}
-          machineTypeId={machineTypeId}
-          label={value.label}
-          type={value.type}
-        />
-        }
+        renderItem={renderAttributeField}
       />
 
       <PopUpMenu onSelect={(value) => { }} optionsArray={InputTypesArray}>
@@ -96,22 +92,6 @@ export default function MachineTypeFormCard(props: MachineTypeFormProps) {
       </View>
 
     </View>
-  )
+  );
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: Colors.lightGrey,
-    width: '100%',
-    paddingVertical: metrics.heightPercentageToDP('2'),
-    paddingHorizontal: '4%',
-    marginBottom: '3%',
-    backgroundColor: Colors.lightBackground,
-  },
-  title: { fontSize: fontSize.h4 },
-  bottomButtonContainer: { flexDirection: 'row', marginTop: '4%' },
-  iconButton: { margin: 0, padding: 0, justifyContent: 'flex-start' }
-})

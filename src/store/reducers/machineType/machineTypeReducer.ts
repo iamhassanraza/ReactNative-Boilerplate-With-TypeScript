@@ -7,7 +7,8 @@ import {
     DELETE_MACHINE,
     ADD_ATTRIBUTE,
     DELETE_ATTRIBUTE,
-    EDIT_ATTRIBUTE
+    EDIT_ATTRIBUTE,
+    InputTypes
 } from "store/types";
 
 const initialState: IMachinesState = {
@@ -89,6 +90,12 @@ export default function machinesReducer(state: IMachinesState = initialState, ac
                     }
                     return type;
                 }),
+                machines: state.machines.map((machine) => {
+                    if (machine.typeId === action.payload.typeId) {
+                        machine.attributes = { ...machine.attributes, [action.payload.attributeId]: getDefaultValue(action.payload.attribute.type) }
+                    }
+                    return machine
+                })
             };
         case ADD_MACHINE:
             return {
@@ -111,5 +118,24 @@ export default function machinesReducer(state: IMachinesState = initialState, ac
             };
         default:
             return state;
+    }
+}
+
+const getDefaultValue = (type: InputTypes) => {
+    switch (type) {
+        case "CheckBox":
+            return false
+
+        case "Date":
+            return new Date()
+
+        case "Number":
+            return 0
+
+        case "Text":
+            return ''
+
+        default:
+            return ''
     }
 }
