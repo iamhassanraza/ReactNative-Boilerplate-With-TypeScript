@@ -1,25 +1,33 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import FormScreen from 'screens/Form';
-import {defaultNavigation} from './NavigationOptions';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import ForgotPassword from 'screens/Authentication/ForgotPassword';
+import Login from 'screens/Authentication/Login';
 
 //screen names for AUTHSTACK
 export enum AuthRoutes {
-  Form = 'Form',
+  Login = 'Login',
+  ForgotPassword = 'ForgotPassword'
 }
 
 // define the params your screen is going to use
 export type AuthStackParamList = {
-  [AuthRoutes.Form]: undefined;
+  [AuthRoutes.Login]: undefined;
+  [AuthRoutes.ForgotPassword]: undefined;
 };
 
 export default function AuthStack() {
   const RootStack = createStackNavigator<AuthStackParamList>();
   return (
     <RootStack.Navigator
-      screenOptions={defaultNavigation}
-      initialRouteName={AuthRoutes.Form}>
-      <RootStack.Screen name={AuthRoutes.Form} component={FormScreen} />
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        // gestureEnabled: true,
+        // gestureDirection: "vertical",
+      }}
+      initialRouteName={AuthRoutes.Login}>
+      <RootStack.Screen name={AuthRoutes.Login} component={Login} />
+      <RootStack.Screen name={AuthRoutes.ForgotPassword} component={ForgotPassword} />
     </RootStack.Navigator>
   );
 }

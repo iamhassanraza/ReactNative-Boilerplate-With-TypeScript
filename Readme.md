@@ -18,3 +18,8 @@ React Native Vector Icons Are Added in this project. Just Use
 visit https://oblador.github.io/react-native-vector-icons/ for icons
 
 
+
+<!-- React Native SVG Integrated -->
+
+import svg images as components and simply use it
+

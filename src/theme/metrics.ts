@@ -20,6 +20,15 @@ export const normalize = (size: number) => {
 };
 
 
+const { width, height } = Dimensions.get('window');
+
+export function getResponsiveSize(figmaPixels: number) {
+    const smallerDimension = Math.min(width, height);
+    const responsiveValue = (figmaPixels / 280) * smallerDimension; // assuming Figma design width of 375
+
+    return responsiveValue;
+}
+
 
 export default {
     SCREEN_WIDTH,
@@ -27,4 +36,10 @@ export default {
     widthPercentageToDP,
     heightPercentageToDP,
     normalize,
+    getResponsiveSize,
+    defaultMargin: Math.min(SCREEN_WIDTH, SCREEN_HEIGHT) * 0.05,
+    smallMargin: Math.min(SCREEN_WIDTH, SCREEN_HEIGHT) * 0.03,
+    xsmallMargin: Math.min(SCREEN_WIDTH, SCREEN_HEIGHT) * 0.02,
+    largeMargin: Math.min(SCREEN_WIDTH, SCREEN_HEIGHT) * 0.08,
+    xlargeMargin: Math.min(SCREEN_WIDTH, SCREEN_HEIGHT) * 0.10,
 };

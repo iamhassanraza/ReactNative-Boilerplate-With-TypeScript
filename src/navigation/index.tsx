@@ -6,13 +6,16 @@ import {navigationRef} from 'utils/Navigator';
 import HomeStack from './HomeStack';
 import {StoreState} from 'store/states/root/RootState';
 import AuthStack from './AuthStack';
+import Login from 'screens/Authentication/Login';
+import ForgotPassword from 'screens/Authentication/ForgotPassword';
 
 const Navigation = () => {
   const user = useSelector((state: StoreState) => state.user.user);
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {user ? <HomeStack /> : <AuthStack />}
+      {/* {user ? <HomeStack /> : <AuthStack />} */}
+      <AuthStack/>
     </NavigationContainer>
   );
 };
