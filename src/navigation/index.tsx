@@ -15,7 +15,8 @@ const Navigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {user ? <HomeStack /> : <AuthStack />} */}
-      <AuthStack/>
+      {/* <AuthStack/> */}
+      <HomeStack></HomeStack>
     </NavigationContainer>
   );
 };

@@ -2,6 +2,11 @@
 import UserInputIcon from 'assets/svgs/usernameIcon.svg'
 import PasswordIcon from 'assets/svgs/passwordIcon.svg'
 import EmailIcon from 'assets/svgs/emailIcon.svg'
+import BackIcon from 'assets/svgs/backIcon.svg'
+import BellIcon from 'assets/svgs/bellIcon.svg'
+import ClockIcon from 'assets/svgs/clockIcon.svg'
+import HomeHeader from 'assets/svgs/homeHeader.svg'
+import MaintainanceIcon from 'assets/svgs/maintainanceIcon.svg'
 
 export const ImageConsts = {
   logo: require('assets/pngs/logo.png'),
@@ -11,5 +16,10 @@ export const ImageConsts = {
 export const SvgImages = {
   UserInputIcon,
   PasswordIcon,
-  EmailIcon
+  EmailIcon,
+  BackIcon,
+  BellIcon,
+  ClockIcon, 
+  HomeHeader,
+  MaintainanceIcon
 }

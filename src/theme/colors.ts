@@ -19,7 +19,10 @@ export const Colors = {
     lightGrey: "#939AA4",
     lighterGrey: "#CDD4DA",
     error: "#dd3333",
-    textInput: '#CDD4DA'
+    textInput: '#CDD4DA',
+    whiteFaded: 'rgba(255,255,255,0.2)',
+    whiteFadedText: 'rgba(255,255,255,0.75)'
+    
 };
 
 

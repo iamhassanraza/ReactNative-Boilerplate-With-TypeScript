@@ -21,12 +21,17 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
-            <View style={{}}>
+            <View>
                 <LogoHeader title='Welcome Back !!' subTitle='Login to your account'></LogoHeader>
-                <CustomTextInput Icon={SvgImages.UserInputIcon}
+                <CustomTextInput
+                    textContentType='username'
+                    Icon={SvgImages.UserInputIcon}
                     placeholder='Username' />
 
-                <CustomTextInput Icon={SvgImages.PasswordIcon}
+                <CustomTextInput
+                    textContentType='password'
+                    secureTextEntry={true}
+                    Icon={SvgImages.PasswordIcon}
                     placeholder='Password' />
 
                 <CustomButton onPress={onLoginPress} style={styles.button} text='Log in'></CustomButton>

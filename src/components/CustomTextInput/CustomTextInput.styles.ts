@@ -26,15 +26,17 @@ export const styles = StyleSheet.create({
         fontSize: fontSize.inputText,
     },
   
+    
     iconContainer: {
         width: heightPercentageToDP("6.5"),
         height: heightPercentageToDP("6.5"),
         position: 'absolute',
         borderRadius: 30,
-        borderWidth:0.2,
+        backgroundColor:Colors.white,
         borderColor: Colors.primary,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        ...commonStyles.shadow
     
     }
 });

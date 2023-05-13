@@ -8,14 +8,16 @@ import metrics from 'theme/metrics'
 import LogoHeader from '../Components/LogoHeader'
 import CustomTextInput from 'components/CustomTextInput'
 import CustomButton from 'components/CustomButton'
+import Header from 'components/Header'
 
 
 export default function ForgotPassword() {
     return (
         <View style={styles.container}>
             <View>
+                <Header></Header>
                 <LogoHeader title='Reset Password' subTitle={`Enter your email address and we'll send you a link to reset your password.`}></LogoHeader>
-                <CustomTextInput Icon={SvgImages.EmailIcon}
+                <CustomTextInput textContentType="emailAddress" Icon={SvgImages.EmailIcon}
                     placeholder='Email' />
 
                 <CustomButton style={styles.button} text='Continue'></CustomButton>
@@ -37,8 +39,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between",
         backgroundColor: Colors.white,
-        paddingTop: metrics.xlargeMargin,
-        paddingHorizontal: metrics.largeMargin
+        // paddingTop: metrics.xlargeMargin,
+        paddingHorizontal: metrics.defaultMargin
     },
     button: {
         marginTop: metrics.smallMargin

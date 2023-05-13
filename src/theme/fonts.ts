@@ -22,6 +22,7 @@ const fontSize = {
     h2: scaleFont(34),
     h3: scaleFont(30),
     h4: scaleFont(28),
+    h5: scaleFont(25),
     headerTitle: scaleFont(28),
     headingSmall_24: scaleFont(24),
     titleMedium: scaleFont(20),
