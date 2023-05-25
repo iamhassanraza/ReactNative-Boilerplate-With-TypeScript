@@ -5,6 +5,7 @@ import { SvgImages } from 'constants/Images'
 import { Colors, commonStyles } from 'theme'
 import { fontsFamily, fontSize } from 'theme/fonts'
 import metrics from 'theme/metrics'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 const FrequentPayments = [
@@ -39,6 +40,7 @@ interface PaymentCardProps {
     icon: any
 
 }
+
 const PaymentCard = (props: PaymentCardProps) => {
     return (
         <View style={{ alignItems: 'center' }}>
@@ -51,14 +53,23 @@ const PaymentCard = (props: PaymentCardProps) => {
 }
 
 
-export default function FrequentPaymentList() {
+interface FrequentPaymentListProps {
+    data?: []
+    onItemPress: (item: any) => void
+}
+
+export default function FrequentPaymentList(props: FrequentPaymentListProps) {
     return (
         <View style={{ marginBottom: metrics.largeMargin }}>
             <TitleBar title='Frequent payments' />
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 {FrequentPayments.map((item) =>
-                    <PaymentCard key={item.id + ''} text={item.title} icon={null}></PaymentCard>
+                    <TouchableOpacity activeOpacity={0.9} key={item.id + ''} onPress={() => { props.onItemPress(item) }}>
+                        <PaymentCard
+                            text={item.title}
+                            icon={null} />
+                    </TouchableOpacity>
                 )}
             </View>
 

@@ -42,7 +42,7 @@ const navigateAndSimpleReset = (name: any, index = 0) => {
 };
 
 
-const push = (name: any, params: any) => {
+const push = (name: any, params?: any) => {
     if (navigationRef.isReady()) {
         navigationRef.dispatch(StackActions.push(name, params));
 

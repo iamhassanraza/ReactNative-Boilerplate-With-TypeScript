@@ -4,6 +4,5 @@ import UserAction from 'store/actions/userActions';
 
 
 export function* login() {
-    //every app has user login functionality 
-    // put your user login logic  here
+    console.log("LOGIN SAGA CALLED")
 }

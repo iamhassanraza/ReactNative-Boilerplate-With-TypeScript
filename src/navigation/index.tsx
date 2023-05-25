@@ -8,15 +8,17 @@ import {StoreState} from 'store/states/root/RootState';
 import AuthStack from './AuthStack';
 import Login from 'screens/Authentication/Login';
 import ForgotPassword from 'screens/Authentication/ForgotPassword';
+import SelectLanguage from 'screens/SelectLanguage';
 
 const Navigation = () => {
   const user = useSelector((state: StoreState) => state.user.user);
 
+  console.log({user})
+
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {user ? <HomeStack /> : <AuthStack />} */}
-      {/* <AuthStack/> */}
-      <HomeStack></HomeStack>
+      <SelectLanguage></SelectLanguage>
     </NavigationContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import HeaderBackground from 'assets/svgs/homeHeader.svg';
 import { Colors, SCREEN_HEIGHT, SCREEN_WIDTH } from 'theme';
@@ -6,10 +6,16 @@ import { fontsFamily, fontSize } from 'theme/fonts';
 import metrics from 'theme/metrics';
 import CircularProgressBar from 'components/CircularProgressBar';
 import { SvgImages } from 'constants/Images';
+import Navigator from 'utils/Navigator';
+import { MainRoutes } from 'navigation/HomeStack';
 
 interface HomeHeaderProps { }
 
 export default function HomeHeader(props: HomeHeaderProps) {
+    const onNotificationIconPress = () => {
+        Navigator.navigate(MainRoutes.Notification)
+    }
+
     return (
         <View style={styles.container}>
             <HeaderBackground width={SCREEN_WIDTH} />
@@ -19,10 +25,10 @@ export default function HomeHeader(props: HomeHeaderProps) {
                         <Text style={styles.nameText}>Andrew Donalds</Text>
                         <Text style={styles.welcomeText}>Welcome To Future City</Text>
                     </View>
-                    <View style={styles.bellIconContainer}>
+                    <TouchableOpacity onPress={onNotificationIconPress} style={styles.bellIconContainer}>
                         <View style={styles.redDot} />
                         <SvgImages.BellIcon />
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.progressContainer}>
                     <CircularProgressBar fill={75} />

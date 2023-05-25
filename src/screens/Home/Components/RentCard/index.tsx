@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CircularProgressBar from 'components/CircularProgressBar';
 import TitleBar from 'screens/Home/Components/TitleBar';
 import { Colors, getResponsiveSize } from 'theme';
@@ -11,6 +11,7 @@ interface RentCardCirclularBarProps {
   fill: number;
   amountText: string;
   text: string;
+  onPress?: () => void
 }
 
 const RentCardCirclularBar: React.FC<RentCardCirclularBarProps> = ({ tintColor, fill, amountText, text }) => {
@@ -30,9 +31,15 @@ const RentCardCirclularBar: React.FC<RentCardCirclularBarProps> = ({ tintColor, 
   );
 };
 
-const RentCard: React.FC = () => {
+
+interface RentCardProps {
+
+  onPress?: () => void
+}
+
+const RentCard: React.FC<RentCardProps> = (props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity activeOpacity={0.9} onPress={props.onPress} style={styles.container}>
       <TitleBar title="Rent" rightTitle="$600/Month" />
       <View style={styles.cardContainer}>
         <RentCardCirclularBar
@@ -48,7 +55,7 @@ const RentCard: React.FC = () => {
           text="5 Months due"
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

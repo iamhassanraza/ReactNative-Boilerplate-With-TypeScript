@@ -1,20 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SvgImages } from 'constants/Images'
 import { Colors } from 'theme'
 import { fontsFamily, fontSize } from 'theme/fonts'
 import metrics from 'theme/metrics'
-import LogoHeader from '../Components/LogoHeader'
+import LogoHeader from 'components/LogoHeader'
 import CustomTextInput from 'components/CustomTextInput'
 import CustomButton from 'components/CustomButton'
 import Navigator from 'utils/Navigator'
 import { AuthRoutes } from 'navigation/AuthStack'
+import { useDispatch } from 'react-redux'
+import UserAction from 'store/actions/userActions'
 
 
 export default function Login() {
 
-
+    const dispatch = useDispatch()
     const onLoginPress = () => {
+        dispatch(UserAction.login({ name: 'Andrew Donalds', email: "example@gmail.com" }))
+
+    }
+
+    const onForgotPasswordPress = () => {
         Navigator.navigate(AuthRoutes.ForgotPassword)
     }
 
@@ -36,7 +43,9 @@ export default function Login() {
 
                 <CustomButton onPress={onLoginPress} style={styles.button} text='Log in'></CustomButton>
 
-                <Text style={styles.forgotPassword}>Forgot Password ?</Text>
+                <TouchableOpacity onPress={onForgotPasswordPress}>
+                    <Text style={styles.forgotPassword}>Forgot Password ?</Text>
+                </TouchableOpacity>
 
 
                 <Text style={styles.v1text}>v1.o</Text>

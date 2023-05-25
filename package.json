@@ -10,8 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/art": "^1.2.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/slider": "^4.4.2",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",
     "@types/lodash": "^4.14.181",
@@ -29,7 +32,10 @@
     "react-native-date-picker": "^4.2.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "2.1.1",
+    "react-native-gifted-charts": "^1.2.42",
     "react-native-image-crop-picker": "^0.37.3",
+    "react-native-modal": "^13.0.1",
+    "react-native-pie": "^1.1.2",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-root-siblings": "^4.1.1",
     "react-native-root-toast": "^3.3.0",

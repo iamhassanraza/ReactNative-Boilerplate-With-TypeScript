@@ -4,18 +4,19 @@ import FastImage from 'components/FastImage'
 import { ImageConsts, SvgImages } from 'constants/Images'
 import { Colors, commonStyles, getResponsiveSize, heightPercentageToDP, widthPercentageToDP } from 'theme'
 import { fontsFamily, fontSize } from 'theme/fonts'
-import metrics from 'theme/metrics'
-import LogoHeader from '../Components/LogoHeader'
+import metrics, { SCREEN_HEIGHT, SCREEN_WIDTH } from 'theme/metrics'
+import LogoHeader from 'components/LogoHeader'
 import CustomTextInput from 'components/CustomTextInput'
 import CustomButton from 'components/CustomButton'
 import Header from 'components/Header'
+import { SafeAreaView } from 'react-native'
 
 
 export default function ForgotPassword() {
     return (
-        <View style={styles.container}>
-            <View>
-                <Header></Header>
+        <SafeAreaView style={styles.container}>
+            <Header></Header>
+            <View style={{paddingHorizontal:metrics.defaultMargin,flex:1}}>
                 <LogoHeader title='Reset Password' subTitle={`Enter your email address and we'll send you a link to reset your password.`}></LogoHeader>
                 <CustomTextInput textContentType="emailAddress" Icon={SvgImages.EmailIcon}
                     placeholder='Email' />
@@ -30,17 +31,19 @@ export default function ForgotPassword() {
             <View style={styles.bottomContainer}>
                 <Text style={styles.v1text}>A product of Business Line Company</Text>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height:SCREEN_HEIGHT,
+        width:SCREEN_WIDTH,
         justifyContent: "space-between",
         backgroundColor: Colors.white,
         // paddingTop: metrics.xlargeMargin,
-        paddingHorizontal: metrics.defaultMargin
+
     },
     button: {
         marginTop: metrics.smallMargin

@@ -9,7 +9,7 @@ import rootSaga from './sagas'
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: [],
+    blacklist: [''],
 }
 
 const configureStore = (rootReducer: any, rootSaga: any) => {

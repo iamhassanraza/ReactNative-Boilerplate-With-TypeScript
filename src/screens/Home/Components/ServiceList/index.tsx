@@ -5,6 +5,7 @@ import { SvgImages } from 'constants/Images'
 import { Colors, commonStyles } from 'theme'
 import { fontsFamily, fontSize } from 'theme/fonts'
 import metrics, { SCREEN_HEIGHT, SCREEN_WIDTH } from 'theme/metrics'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Services = [
     {
@@ -36,27 +37,27 @@ interface ServiceCardProps {
 
 const ServiceCard = (props: ServiceCardProps) => {
 
-    const moveAnim = new Animated.Value(30);
+    // const moveAnim = new Animated.Value(30);
 
-    useEffect(() => {
-        Animated.parallel([
-            Animated.timing(moveAnim, {
-                toValue: 0,
-                duration: 1000,
-                useNativeDriver: true
-            }),
-         
-        ]).start();
-    }, []);
+    // useEffect(() => {
+    //     Animated.parallel([
+    //         Animated.timing(moveAnim, {
+    //             toValue: 0,
+    //             duration: 1000,
+    //             useNativeDriver: true
+    //         }),
+
+    //     ]).start();
+    // }, []);
 
 
     return (
-        <Animated.View style={{ transform: [{ translateX: moveAnim }] }}>
-            <View style={styles.serviceCard}>
-                <SvgImages.MaintainanceIcon style={styles.icon} />
-                <Text style={styles.text}>{props.text}</Text>
-            </View>
-        </Animated.View>
+        // <Animated.View style={{ transform: [{ translateX: moveAnim }] }}>
+        <View style={styles.serviceCard}>
+            <SvgImages.MaintainanceIcon style={styles.icon} />
+            <Text style={styles.text}>{props.text}</Text>
+        </View>
+        // </Animated.View>
 
     )
 }
@@ -67,12 +68,19 @@ if (Platform.OS === 'android') {
     }
 }
 
-export default function ServiceList() {
+
+
+interface ServiceListProps {
+    data?: []
+    onItemPress: (item: any) => void
+}
+
+
+export default function ServiceList(props: ServiceListProps) {
 
 
 
-
-    const renderItem = ({ item }: { item: typeof Services[number] }) => <ServiceCard text={item.title} icon={null} />
+    const renderItem = ({ item }: { item: typeof Services[number] }) => <TouchableOpacity onPress={() => props.onItemPress(item)} activeOpacity={0.8}><ServiceCard text={item.title} icon={null} /></TouchableOpacity>
 
     return (
 
@@ -93,7 +101,7 @@ export default function ServiceList() {
 }
 
 const styles = StyleSheet.create({
-    container: {marginBottom:metrics.defaultMargin},
+    container: { marginBottom: metrics.defaultMargin },
     contentContainer: {
         paddingBottom: metrics.xsmallMargin,
         paddingHorizontal: '0.5%',

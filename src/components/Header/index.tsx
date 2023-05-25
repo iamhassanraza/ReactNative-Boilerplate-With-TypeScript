@@ -10,9 +10,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 interface HeaderProps {
     title?: string
+    backButtonShown?: boolean
 }
 
-export default function Header({ title = '' }: HeaderProps) {
+export default function Header({ title = '', backButtonShown = true }: HeaderProps) {
 
     const onBackPress = () => {
         Navigator.goBack()
@@ -22,9 +23,9 @@ export default function Header({ title = '' }: HeaderProps) {
     return (
         <View style={styles.container}>
             <View style={styles.left}>
-                <TouchableOpacity activeOpacity={0.7} onPress={onBackPress} style={styles.circle}>
+                {backButtonShown && <TouchableOpacity activeOpacity={0.7} onPress={onBackPress} style={styles.circle}>
                     <SvgImages.BackIcon></SvgImages.BackIcon>
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </View>
             <View style={styles.mid}>
                 <Text style={styles.headertext}>{title}</Text>
@@ -40,7 +41,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: heightPercentageToDP('6'),
         justifyContent: 'center',
-        marginVertical: metrics.smallMargin
+        marginVertical: metrics.smallMargin,
+        marginHorizontal: metrics.defaultMargin
     },
     left: {
 
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     },
     right: { flex: 1 },
     mid: {
-        flex: 3,
+        flex: 5,
         justifyContent: 'center',
         alignItems: 'center'
     },

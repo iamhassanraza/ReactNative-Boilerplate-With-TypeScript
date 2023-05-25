@@ -8,6 +8,14 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import Navigation from 'navigation';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import SplashScreen from 'react-native-splash-screen';
+import { Platform, UIManager } from 'react-native';
+
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const App = () => {
 
