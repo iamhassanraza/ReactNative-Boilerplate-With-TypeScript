@@ -1,8 +1,0 @@
-export enum postTypes {
-    //for login Actions
-    FETCT_POST_REQUEST = "FETCT_POST_REQUEST",
-    FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS",
-    FETCH_POST_FAILURE = "FETCH_POST_FAILURE",
-    ADD_POST = 'ADD_POST'
-    
-};

@@ -6,19 +6,30 @@ import { fontsFamily, fontSize } from 'theme/fonts'
 import metrics from 'theme/metrics'
 import LogoHeader from 'components/LogoHeader'
 import CustomButton from 'components/CustomButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import IconWithText from 'components/IconWithText'
 import { languagesEnum } from 'translations'
+import { LanguageActions } from 'store/actions/languageActions'
+import { StoreState } from 'store/reducers/rootReducer'
 
 
 export default function SelectLanguage() {
 
-    const [selectedLanguage, setselectedLanguage] = useState(languagesEnum.en)
+    const currentLanaguge = useSelector((state: StoreState) => state.language.currentLanguage)
+    const [selectedLanguage, setselectedLanguage] = useState(currentLanaguge !== null ? currentLanaguge : languagesEnum.en)
 
     const dispatch = useDispatch()
 
     const onContinuePress = () => {
+        dispatch(LanguageActions.switchLanguage(selectedLanguage))
+    }
 
+    const onEnglishLanguagePress = () => {
+        setselectedLanguage(languagesEnum.en)
+    }
+
+    const onArabicLanguagePress = () => {
+        setselectedLanguage(languagesEnum.ar)
     }
 
 
@@ -30,14 +41,14 @@ export default function SelectLanguage() {
                     Icon={SvgImages.EnglishFlag}
                     text='English'
                     showcheckIcon={selectedLanguage === languagesEnum.en}
-                    onPress={() => setselectedLanguage(languagesEnum.en)}
+                    onPress={onEnglishLanguagePress}
                 />
 
                 <IconWithText
                     Icon={SvgImages.ArabicFlag}
                     text='عربي'
                     showcheckIcon={selectedLanguage === languagesEnum.ar}
-                    onPress={() => setselectedLanguage(languagesEnum.ar)}
+                    onPress={onArabicLanguagePress}
                 />
 
 

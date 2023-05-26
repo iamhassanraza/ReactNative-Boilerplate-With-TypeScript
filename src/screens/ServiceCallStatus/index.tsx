@@ -53,7 +53,7 @@ export default function ServiceCallStatus() {
             <ScrollView style={{ flex: 1, paddingHorizontal: metrics.defaultMargin }}>
 
                 <PieChartCard data={ServiceCallStatusPieData}></PieChartCard>
-                <Tabs selectedIndex={selectedIndex} handleTabChange={handleTabChange} tabs={["Pending (3)", "Progress (5)", "Completed (100)"]}></Tabs>
+                <Tabs selectedIndex={selectedIndex} handleTabChange={handleTabChange} tabs={["Pending (3)", "Progress (5)", "Completed (10)"]}></Tabs>
 
                 <View style={{ marginBottom: metrics.defaultMargin }}>
                     {/* {renderTabs()} */}

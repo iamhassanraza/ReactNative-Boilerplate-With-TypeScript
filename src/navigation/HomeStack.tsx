@@ -7,6 +7,7 @@ import RentDetails from 'screens/RentDetails';
 import ServiceFeeDetails from 'screens/ServiceFeeDetails';
 import ServiceCallStatus from 'screens/ServiceCallStatus';
 import ServiceDetails from 'screens/ServiceDetails';
+import SelectLanguage from 'screens/SelectLanguage';
 
 //screen names for homestack
 export enum MainRoutes {
@@ -17,7 +18,8 @@ export enum MainRoutes {
   RentDetails = 'RentDetails',
   ServiceFeeDetails = 'ServiceFeeDetails',
   ServiceCallStatus = 'ServiceCallStatus',
-  ServiceDetails = "ServiceDetails"
+  ServiceDetails = "ServiceDetails",
+  SelectLanguage = "SelectLanguage"
 
 }
 
@@ -31,6 +33,7 @@ export type MainStackParamList = {
   [MainRoutes.ServiceFeeDetails]: undefined;
   [MainRoutes.ServiceCallStatus]: undefined;
   [MainRoutes.ServiceDetails]: undefined;
+  [MainRoutes.SelectLanguage]: undefined;
 
 };
 
@@ -50,6 +53,7 @@ export default function HomeStack() {
       <RootStack.Screen name={MainRoutes.ServiceFeeDetails} component={ServiceFeeDetails} />
       <RootStack.Screen name={MainRoutes.ServiceCallStatus} component={ServiceCallStatus} />
       <RootStack.Screen name={MainRoutes.ServiceDetails} component={ServiceDetails} />
+      <RootStack.Screen name={MainRoutes.SelectLanguage} component={SelectLanguage} />
     </RootStack.Navigator>
   );
 }

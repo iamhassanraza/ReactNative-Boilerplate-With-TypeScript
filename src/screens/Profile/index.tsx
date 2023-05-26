@@ -8,14 +8,20 @@ import { Colors, commonStyles } from 'theme'
 import { fontsFamily, fontSize } from 'theme/fonts'
 import { SvgProps } from 'react-native-svg'
 import { SvgImages } from 'constants/Images'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
+import { UserActions } from 'store/actions/userActions'
+import Navigator from 'utils/Navigator'
+import { MainRoutes } from 'navigation/HomeStack'
 
 interface IconWithTextProps {
     LeftIcon?: React.FC<SvgProps>,
     RightIcon?: React.FC<SvgProps>
     text: string
+    onPress?: () => void
 }
-const IconWithText = ({ LeftIcon, RightIcon, text }: IconWithTextProps) => {
-    return <View style={styles.IconWithTextContainer}>
+const IconWithText = ({ LeftIcon, RightIcon, text, onPress = () => { } }: IconWithTextProps) => {
+    return <TouchableOpacity activeOpacity={1} onPress={onPress} style={styles.IconWithTextContainer}>
         {!!LeftIcon && <LeftIcon></LeftIcon>}
 
         <View style={styles.textContainer}>
@@ -23,7 +29,7 @@ const IconWithText = ({ LeftIcon, RightIcon, text }: IconWithTextProps) => {
         </View>
 
         {!!RightIcon && <RightIcon></RightIcon>}
-    </View>
+    </TouchableOpacity>
 }
 
 
@@ -32,6 +38,7 @@ const IconWithText = ({ LeftIcon, RightIcon, text }: IconWithTextProps) => {
 
 export default function ProfileScreen() {
 
+    const dispatch = useDispatch()
 
     const NameCard = () => {
         return <View style={styles.nameCardContainer}>
@@ -41,6 +48,14 @@ export default function ProfileScreen() {
     }
 
 
+    const onLogoutPress = () => {
+        dispatch(UserActions.logout())
+    }
+
+    const onSwitchLanguagePress = () => {
+        Navigator.push(MainRoutes.SelectLanguage)
+    }
+
 
     return (
         <RootView>
@@ -48,8 +63,8 @@ export default function ProfileScreen() {
             <View style={{ paddingHorizontal: metrics.defaultMargin }}>
                 <NameCard></NameCard>
                 <IconWithText LeftIcon={SvgImages.Email} text='Laara.hariis021@gmail.com'></IconWithText>
-                <IconWithText LeftIcon={SvgImages.Globe} text='Switch language'></IconWithText>
-                <IconWithText LeftIcon={SvgImages.Logout} text='Logout'></IconWithText>
+                <IconWithText onPress={onSwitchLanguagePress} LeftIcon={SvgImages.Globe} text='Switch language'></IconWithText>
+                <IconWithText onPress={onLogoutPress} LeftIcon={SvgImages.Logout} text='Logout'></IconWithText>
             </View>
         </RootView>
     )

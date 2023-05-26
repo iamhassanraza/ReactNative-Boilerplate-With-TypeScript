@@ -1,13 +1,18 @@
-import User from "models/user/User";
-import { userTypes } from "store/types/userTypes";
-import { IAction } from "./IAction";
+import { IUser, LoginAction, LogoutAction, UserActionTypes } from 'store/types';
 
 
-export default class UserAction {
-    public static login = (requestParams: any): IAction<User> => {
-        return {
-            type: userTypes.LOGIN,
-            payload: requestParams,
-        };
-    };
+
+export class UserActions {
+    public static login = (user: IUser): LoginAction => ({
+        type: UserActionTypes.LOGIN,
+        payload: { user },
+    });
+
+
+    public static logout = (): LogoutAction => ({
+        type: UserActionTypes.LOGOUT,
+
+    });
+
+
 }

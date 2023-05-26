@@ -1,31 +1,28 @@
+import { UserActions, UserActionTypes, IUser } from "store/types";
 
-import UserState from "store/states/user/UserReducerState"
-import { iDataState } from "store/states/IState"
-import { userTypes } from "store/types/userTypes"
-import User from "models/user/User"
-import { IAction } from "store/actions/IAction"
 
-export default class UserReducer {
-    private static readonly _initialState: UserState = {
-        user: undefined,
-        //below will be common in every reducer state as it is being extended from Istate
-        state: iDataState.initial,
-        errorMessage: ""
-    }
-
-    public static reducer(state: UserState = UserReducer._initialState, action: IAction<any | User>): UserState {
-
-        switch (action.type) {
-            case userTypes.LOGIN:
-                return {
-                    user: action.payload,
-                    state: iDataState.loaded,
-                    errorMessage: "",
-                }
-
-            default:
-                return state
-        }
-    }
-
+export interface UserReducerState {
+    isLoggedIn: boolean;
+    user: IUser | null
 }
+
+const initialState: UserReducerState = {
+    isLoggedIn: false,
+    user: null,
+};
+
+const userReducer = (state: UserReducerState = initialState, action: UserActions): UserReducerState => {
+    switch (action.type) {
+        case UserActionTypes.LOGIN:
+            return {
+                isLoggedIn: true,
+                user: action.payload.user
+            };
+        case UserActionTypes.LOGOUT:
+            return initialState;
+        default:
+            return state;
+    }
+};
+
+export default userReducer;

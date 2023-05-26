@@ -10,15 +10,21 @@ import CustomButton from 'components/CustomButton'
 import Navigator from 'utils/Navigator'
 import { AuthRoutes } from 'navigation/AuthStack'
 import { useDispatch } from 'react-redux'
-import UserAction from 'store/actions/userActions'
+import { IUser } from 'store/types'
+import { UserActions } from 'store/actions/userActions'
 
 
 export default function Login() {
 
     const dispatch = useDispatch()
     const onLoginPress = () => {
-        dispatch(UserAction.login({ name: 'Andrew Donalds', email: "example@gmail.com" }))
-
+        const dummyUser: IUser = {
+            id: "1",
+            name: 'Andrew Donalds',
+            email: "example@gmail.com",
+            job: "Care Taker"
+        }
+        dispatch(UserActions.login(dummyUser))
     }
 
     const onForgotPasswordPress = () => {

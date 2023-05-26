@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux'
-import { StoreState } from 'store/states/root/RootState'
+import userReducer, { UserReducerState } from "store/reducers/user/userReducer";
+import languageReducer, { LanguageReducerState } from './language/languageReducer';
 
-import UserReducer from './user/userReducer'
-import PostReducer from './post/postReducer'
+export interface StoreState {
+    user: UserReducerState,
+    language: LanguageReducerState
+}
 
 
 export const rootReducer = combineReducers<StoreState>({
-    user: UserReducer.reducer,
-    postReducer: PostReducer.reducer
+    user: userReducer,
+    language: languageReducer
 })

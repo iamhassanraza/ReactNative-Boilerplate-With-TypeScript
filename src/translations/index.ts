@@ -33,8 +33,8 @@ i18n.use(initReactI18next).init({
 });
 
 export const changeLanguage = (language: SupportedLanguages) => {
-i18n.changeLanguage(language)
-//RESTART APP
+  i18n.changeLanguage(language)
+  //RESTART APP
 }
 
 

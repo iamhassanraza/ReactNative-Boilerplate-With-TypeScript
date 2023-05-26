@@ -35,7 +35,6 @@ export default StyleSheet.create({
     width: 0,
   },
   timelineDot: {
-    borderWidth: 1,
     backgroundColor: Colors.primary,
     width: 10,
     height: 10,
